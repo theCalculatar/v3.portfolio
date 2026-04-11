@@ -6,7 +6,7 @@ import { Features } from "./features";
 import { Testimonial } from "./testimonial";
 import { Video } from "./video";
 import { Callout } from "./callout";
-import { Stats } from "./stats";
+import { About } from "./about";
 import { CallToAction } from "./call-to-action";
 import { Projects } from "./projects";
 
@@ -33,8 +33,8 @@ const Block = (block: PageBlocks) => {
       return <Hero data={block} />;
     case "PageBlocksCallout":
       return <Callout data={block} />;
-    case "PageBlocksStats":
-      return <Stats data={block} />;
+    case "PageBlocksAbout":
+      return <About data={block} />;
     case "PageBlocksContent":
       return <Content data={block} />;
     case "PageBlocksFeatures":

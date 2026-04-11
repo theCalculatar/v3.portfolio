@@ -1,34 +1,34 @@
-import type { Collection } from 'tinacms';
-import { heroBlockSchema } from '@/components/blocks/hero';
-import { contentBlockSchema } from '@/components/blocks/content';
-import { testimonialBlockSchema } from '@/components/blocks/testimonial';
-import { featureBlockSchema } from '@/components/blocks/features';
-import { videoBlockSchema } from '@/components/blocks/video';
-import { calloutBlockSchema } from '@/components/blocks/callout';
-import { statsBlockSchema } from '@/components/blocks/stats';
-import { ctaBlockSchema } from '@/components/blocks/call-to-action';
-import { projectBlockSchema } from '@/components/blocks/projects';
+import type { Collection } from "tinacms";
+import { heroBlockSchema } from "@/components/blocks/hero";
+import { contentBlockSchema } from "@/components/blocks/content";
+import { testimonialBlockSchema } from "@/components/blocks/testimonial";
+import { featureBlockSchema } from "@/components/blocks/features";
+import { videoBlockSchema } from "@/components/blocks/video";
+import { calloutBlockSchema } from "@/components/blocks/callout";
+import { aboutBlockSchema } from "@/components/blocks/about";
+import { ctaBlockSchema } from "@/components/blocks/call-to-action";
+import { projectBlockSchema } from "@/components/blocks/projects";
 
 const Page: Collection = {
-  label: 'Pages',
-  name: 'page',
-  path: 'content/pages',
-  format: 'mdx',
+  label: "Pages",
+  name: "page",
+  path: "content/pages",
+  format: "mdx",
   ui: {
     router: ({ document }) => {
-      const filepath = document._sys.breadcrumbs.join('/');
-      if (filepath === 'home') {
-        return '/';
+      const filepath = document._sys.breadcrumbs.join("/");
+      if (filepath === "home") {
+        return "/";
       }
       return `/${filepath}`;
     },
   },
   fields: [
     {
-      type: 'object',
+      type: "object",
       list: true,
-      name: 'blocks',
-      label: 'Sections',
+      name: "blocks",
+      label: "Sections",
       ui: {
         visualSelector: true,
       },
@@ -36,7 +36,7 @@ const Page: Collection = {
         heroBlockSchema,
         calloutBlockSchema,
         featureBlockSchema,
-        statsBlockSchema,
+        aboutBlockSchema,
         ctaBlockSchema,
         contentBlockSchema,
         testimonialBlockSchema,
