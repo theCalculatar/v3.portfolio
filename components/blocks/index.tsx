@@ -8,13 +8,12 @@ import { Video } from "./video";
 import { Callout } from "./callout";
 import { Stats } from "./stats";
 import { CallToAction } from "./call-to-action";
-import { Projects } from "./projects";
 
-export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
+export const Blocks = (props: any) => {
   if (!props.blocks) return null;
   return (
     <>
-      {props.blocks.map(function (block, i) {
+      {props.blocks.map(function (block: PageBlocks, i: number) {
         return (
           <div key={i} data-tina-field={tinaField(block)}>
             <Block {...block} />
@@ -43,8 +42,6 @@ const Block = (block: PageBlocks) => {
       return <Testimonial data={block} />;
     case "PageBlocksCta":
       return <CallToAction data={block} />;
-    case "PageBlocksProject":
-      return <Projects data={block} />;
     default:
       return null;
   }
