@@ -21,6 +21,32 @@ export const IconOptions = {
       />
     </svg>
   ),
+    Mahlane: (props: any) => (
+    <svg
+      {...props}
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>Mahlane</title>
+      <path
+        d="M10.337 28.4966L7.32336 28.4958L11.3018 17.6698L12.6415 14.0245L16.0461 4.76001L19.0134 4.76081L27.7234 28.5014L24.7097 28.5006L21.7901 20.2689L21.1128 18.3595L17.6215 8.51592L17.4361 8.51585L13.9394 18.3573L12.8475 21.4306L10.337 28.4966Z"
+        fill="currentColor"
+      />
+      <path
+        d="M22.9633 15.6436L11.404 15.64L11.4033 18.3565L13.9394 18.3573L14.414 18.3574L19.746 18.3591L21.1128 18.3595L22.9626 18.36L22.9633 15.6436Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M8.87727 4.8235L5.44638 4.82257L5.43994 28.5607L8.129 28.5615L8.1339 10.526L8.36578 10.5261L11.3017 17.6698L12.0746 19.5502L12.8474 21.4306L13.9393 18.3573L14.4139 18.3574L12.6414 14.0245L8.87727 4.8235ZM19.746 18.359L21.1127 18.3594L21.79 20.2689L25.7985 10.5308L26.0303 10.5309L26.0254 28.5664L28.7145 28.567L28.7209 4.82889L25.29 4.82796L19.746 18.359Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
   ...BoxIcons,
   FaFacebookF,
   FaGithub,
@@ -68,6 +94,10 @@ const iconColorClass: {
   white: {
     regular: 'text-white opacity-80',
     circle: 'bg-white-400 dark:bg-white-500 text-white-50',
+  },
+  black: {
+    regular: "text-black",
+    circle: "bg-black text-black-50",
   },
 };
 
