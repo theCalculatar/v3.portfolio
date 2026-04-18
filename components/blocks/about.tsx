@@ -14,22 +14,10 @@ export const About = ({ data }: { data: PageBlocksAbout }) => {
   return (
     <Section background={data.background!}>
       <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
-        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
-          <h2
-            className="text-4xl font-medium lg:text-5xl"
-            data-tina-field={tinaField(data, "title")}
-          >
-            {data.title}
-          </h2>
-          <p data-tina-field={tinaField(data, "description")}>
-            {data.description}
-          </p>
-        </div>
-
         <div className=" items-center justify-center">
           {data.image?.src && (
             <div
-              className="w-52 h-52 relative mx-auto overflow-visible"
+              className="w-40 h-40 relative mx-auto overflow-visible"
               data-tina-field={tinaField(data, "image")}
             >
               <Image
@@ -51,6 +39,18 @@ export const About = ({ data }: { data: PageBlocksAbout }) => {
               />
             </div>
           )}
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
+          <h2
+            className="text-4xl font-medium lg:text-5xl"
+            data-tina-field={tinaField(data, "title")}
+          >
+            {data.title}
+          </h2>
+          <p data-tina-field={tinaField(data, "description")}>
+            {data.description}
+          </p>
         </div>
 
         <div>

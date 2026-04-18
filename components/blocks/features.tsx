@@ -25,7 +25,10 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
           >
             {data.title}
           </h2>
-          <p data-tina-field={tinaField(data, "description")} className="mt-4 text-gray-500">
+          <p
+            data-tina-field={tinaField(data, "description")}
+            className="mt-4 text-gray-500"
+          >
             {data.description}
           </p>
         </div>
@@ -61,10 +64,12 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
     <div className="group shadow-zinc-950/5 overflow-hidden">
       <CardHeader className="pb-3">
         <Image
-          src={"/uploads/860shots_so.jpg"}
-          alt={data.icon?.name || "Feature Icon"}
-          width={148}
-          height={148}
+          src={data.src || "/uploads/860shots_so.jpg"}
+          alt={"Feature Image"}
+          aria-hidden="true"
+          width={500}
+          height={500}
+          data-tina-field={tinaField(data, "src")}
           className="mx-auto mb-4 w-full h-full opacity object-cover select-none"
         ></Image>
 
@@ -76,7 +81,10 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
         </h3>
       </CardHeader>
 
-      <CardContent className="text-sm pb-8">
+      <CardContent
+        className="text-sm pb-8"
+        data-tina-field={tinaField(data, "text")}
+      >
         <TinaMarkdown
           data-tina-field={tinaField(data, "text")}
           content={data.text}
@@ -137,7 +145,13 @@ export const featureBlockSchema: Template = {
         },
       },
       fields: [
-        iconSchema as any,
+        {
+          type: "image",
+          label: "Image",
+          name: "src",
+          uploadDir: () => "/features",
+        },
+
         {
           type: "string",
           label: "Title",

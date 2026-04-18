@@ -7,6 +7,7 @@ import Author from "./collection/author";
 import Page from "./collection/page";
 import Tag from "./collection/tag";
 import Project from "./collection/project";
+import Experience from "./collection/experience";
 
 const config = defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID!,
@@ -33,7 +34,7 @@ const config = defineConfig({
     basePath: nextConfig.basePath?.replace(/^\//, "") || "", // The base path of the app (could be /blog)
   },
   schema: {
-    collections: [Page, Post, Author, Tag, Project, Global],
+    collections: [Page, Post, Author, Tag, Project, Experience, Global],
   },
 });
 

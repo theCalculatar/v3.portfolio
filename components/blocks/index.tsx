@@ -9,6 +9,7 @@ import { Callout } from "./callout";
 import { About } from "./about";
 import { CallToAction } from "./call-to-action";
 import { Projects } from "./projects";
+import Experience from "./experience";
 
 export const Blocks = (props: any) => {
   if (!props.blocks) return null;
@@ -45,6 +46,8 @@ const Block = (block: PageBlocks) => {
       return <CallToAction data={block} />;
     case "PageBlocksProject":
       return <Projects data={block} />;
+    case "PageBlocksExperience":
+      return <Experience data={block} />;
     default:
       return null;
   }
