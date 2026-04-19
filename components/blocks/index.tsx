@@ -10,6 +10,7 @@ import { About } from "./about";
 import { CallToAction } from "./call-to-action";
 import { Projects } from "./projects";
 import Experience from "./experience";
+import Badge from "./badge";
 
 export const Blocks = (props: any) => {
   if (!props.blocks) return null;
@@ -48,6 +49,8 @@ const Block = (block: PageBlocks) => {
       return <Projects data={block} />;
     case "PageBlocksExperience":
       return <Experience data={block} />;
+    case "PageBlocksBadge":
+      return <Badge data={block} />;
     default:
       return null;
   }

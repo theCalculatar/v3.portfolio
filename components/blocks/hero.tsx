@@ -61,32 +61,6 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-      <div
-        className="flex text-6xl justify-center text-center pointer-events-auto select-none"
-      >
-        <span
-          className="sm:text-[6vw] to-gray-600 bg-linear-to-l   
-               bg-clip-text text-transparent text-center whitespace-nowrap opacity-10"
-        >
-          M
-        </span>
-        <div className="inline-block w-40 sm:w-[10vw] h-[4.25vw] my-auto rounded-2xl m-2 max-h-28 min-h-12 overflow-hidden bg-gray-50 shadow-md border-4 border-white zoom-in-20">
-          <Image
-            src="/uploads/posts/learning-about-components.webp"
-            alt="Placeholder"
-            width={96}
-            height={96}
-            className="h-full w-full opacity object-cover hover:grayscale-0 active: transition-all duration-500 ease-in-out hover:scale-105"
-          />
-        </div>
-        <span
-          className="sm:text-[6vw] to-gray-600 bg-linear-to-r   
-               bg-clip-text text-transparent text-center whitespace-nowrap opacity-10"
-        >
-          M
-        </span>
-      </div>
-
       <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
         {data.headline && (
           <div data-tina-field={tinaField(data, "headline")}>
