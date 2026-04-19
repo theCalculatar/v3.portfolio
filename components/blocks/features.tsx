@@ -149,7 +149,8 @@ export const featureBlockSchema: Template = {
           type: "image",
           label: "Image",
           name: "src",
-          uploadDir: () => "/features",
+          // @ts-ignore
+          uploadDir: () => "features",
         },
 
         {
