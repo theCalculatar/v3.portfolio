@@ -5,11 +5,12 @@ import { tinaField } from "tinacms/react";
 import {
   PageBlocksExperience,
   PageBlocksExperienceItemsExperience,
-  PageBlocksExperienceItemsExperienceFilter,
 } from "@/tina/__generated__/types";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { components } from "../mdx-components";
 import { formatDate } from "@/lib/utils";
+import Link from "next/link";
+import { Badge } from "../ui/badge";
 
 function Experience({ data }: { data: PageBlocksExperience }) {
   return (
@@ -18,7 +19,7 @@ function Experience({ data }: { data: PageBlocksExperience }) {
         <div className="text-center">
           <h2
             data-tina-field={tinaField(data, "title")}
-            className="text-balance text-4xl font-semibold lg:text-5xl"
+            className="text-balance text-3xl sm:text-4xl font-semibold lg:text-5xl"
           >
             {data.title}
           </h2>
@@ -29,7 +30,7 @@ function Experience({ data }: { data: PageBlocksExperience }) {
             {data.description}
           </p>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 md:mt-16">
           {data.items &&
             data.items?.map(function (block, i) {
               return <ExperienceItem key={i} {...block!.experience!} />;
@@ -48,7 +49,7 @@ const ExperienceItem: React.FC<PageBlocksExperienceItemsExperience> = (
   if (!data.title) return null;
 
   return (
-    <div className="mb-8">
+    <div className="mb-14">
       <div className="flex justify-between items-center">
         <h3
           className="text-lg font-semibold"
@@ -68,13 +69,39 @@ const ExperienceItem: React.FC<PageBlocksExperienceItemsExperience> = (
         </p>
       </div>
       <p className="text-gray-600 flex justify-between text-sm">
-        <span data-tina-field={tinaField(data, "company")}>{data.company}</span>
-        <span data-tina-field={tinaField(data, "location")}>
+        <span className="flex items-center gap-1">
+          <span className="size-3 border-l-2 border-gray-500 border-b-2"></span>
+          <span data-tina-field={tinaField(data, "company")}>
+            <Link href={""} className="underline">
+              {data.company}
+            </Link>
+          </span>
+        </span>
+        <span
+          data-tina-field={tinaField(data, "location")}
+          className="text-gray-900"
+        >
           {data.location}
         </span>
       </p>
+      {data.tags && (
+        <div className="mt-4 flex gap-2">
+          {data.tags?.map(function (block, i) {
+            return (
+              <Badge
+                key={i}
+                variant={"outline"}
+                data-tina-field={tinaField(block, "tag")}
+                className="rounded-lg"
+              >
+                {block?.tag?.name}
+              </Badge>
+            );
+          })}
+        </div>
+      )}
       <div
-        className="mt-2 text-sm prose dark:prose-dark w-full max-w-none"
+        className="mt-4 text-sm prose dark:prose-dark w-full max-w-none"
         data-tina-field={tinaField(data, "description")}
       >
         <TinaMarkdown
