@@ -5,12 +5,12 @@ import { iconSchema } from "@/tina/fields/icon";
 import { Button } from "@/components/ui/button";
 import { PageBlocksCta } from "@/tina/__generated__/types";
 import { Icon } from "../icon";
-import { Section } from "../layout/section";
+import { Section, sectionBlockSchemaField } from "../layout/section";
 import { Mail } from "lucide-react";
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
   return (
-    <Section>
+    <Section background={data.background!}>
       <div>
         <Mail
           className="size-30 mx-auto mb-0 rotate-10 "
@@ -87,6 +87,7 @@ export const ctaBlockSchema: Template = {
     },
   },
   fields: [
+    sectionBlockSchemaField as any,
     {
       type: "string",
       label: "Title",
