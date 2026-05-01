@@ -15,10 +15,6 @@
       {
         "href": "/about",
         "label": "About"
-      },
-      {
-        "href": "/posts",
-        "label": "Blog"
       }
     ]
   },
@@ -28,25 +24,19 @@
         "icon": {
           "name": "FaLinkedin"
         },
-        "url": "https://www.linkedin.com/company/tinacms"
+        "url": "www.linkedin.com/in/mahlane"
       },
       {
         "icon": {
           "name": "FaGithub"
         },
-        "url": "https://github.com/tinacms/tinacms"
+        "url": "https://github.com/theCalculatar"
       },
       {
         "icon": {
-          "name": "FaYoutube"
+          "name": "BiLogoInstagramAlt"
         },
-        "url": "https://www.youtube.com/@TinaCMS"
-      },
-      {
-        "icon": {
-          "name": "FaXTwitter"
-        },
-        "url": "https://x.com/TinaCMS"
+        "url": "https://www.instagram.com/iam.mahlane/"
       }
     ]
   },
