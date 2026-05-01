@@ -42,7 +42,7 @@ export const Footer = () => {
           aria-hidden
         >
           <p
-            className="mx-auto max-w-full select-none font-bold leading-[0.85] tracking-tighter text-[#e5e7eb] dark:text-[#1f2937] text-[3.5rem] sm:text-[6.5rem] md:text-[7.5rem] lg:text-[10rem] xl:text-[11rem] 2xl:text-[11.5rem]"
+            className="mx-auto max-w-full select-none font-bold leading-[0.85] tracking-tighter text-[#e5e7eb] text-[3.5rem] sm:text-[6.5rem] md:text-[7.5rem] lg:text-[10rem] xl:text-[11rem] 2xl:text-[11.5rem]"
             style={{
               maskImage:
                 "linear-gradient(to bottom, transparent 0%, black 12%, black 8%, transparent 100%)",
