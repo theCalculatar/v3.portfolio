@@ -1,18 +1,32 @@
 import React from "react";
 import type { Template } from "tinacms";
-import { PageBlocksTestimonial, PageBlocksTestimonialTestimonials } from "../../tina/__generated__/types";
+import {
+  PageBlocksTestimonial,
+  PageBlocksTestimonialTestimonials,
+} from "../../tina/__generated__/types";
 import { Section } from "../layout/section";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Card, CardContent } from "../ui/card";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import { tinaField } from "tinacms/dist/react";
-import { sectionBlockSchemaField } from '../layout/section';
+import { sectionBlockSchemaField } from "../layout/section";
+import { cn } from "@/lib/utils";
 
 export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   return (
     <Section background={data.background!}>
-      <div className="text-center">
-        <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
-        <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
+      <div className="text-center max-w-3xl mx-auto">
+        <h2
+          className="text-title text-3xl sm:text-4xl lg:text-5xl text-pretty font-semibold"
+          data-tina-field={tinaField(data, "title")}
+        >
+          {data.title}
+        </h2>
+        <p
+          className="text-body mt-6"
+          data-tina-field={tinaField(data, "description")}
+        >
+          {data.description}
+        </p>
       </div>
       <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
         {data.testimonials?.map((testimonial, index) => (
@@ -23,24 +37,65 @@ export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
   );
 };
 
-const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTestimonials }) => {
+const TestimonialCard = ({
+  testimonial,
+}: {
+  testimonial: PageBlocksTestimonialTestimonials;
+}) => {
   return (
-    <Card className="mb-6 break-inside-avoid">
-      <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
-        <Avatar className="size-9" data-tina-field={tinaField(testimonial, 'avatar')}>
+    <Card
+      className={cn(
+        "mb-6 break-inside-avoid shadow-none backdrop-blur-2xl",
+        testimonial.background,
+      )}
+      data-tina-field={tinaField(testimonial, "background")}
+    >
+      <CardHeader className="flex gap-4 items-center bg-white shadow-sm p-4 mx-4 rounded-lg ">
+        <Avatar
+          className="size-9"
+          data-tina-field={tinaField(testimonial, "avatar")}
+        >
           {testimonial.avatar && (
-            <AvatarImage alt={testimonial.author!} src={testimonial.avatar} loading="lazy" width="120" height="120" />
+            <AvatarImage
+              alt={testimonial.author!}
+              src={testimonial.avatar}
+              loading="lazy"
+              width="120"
+              height="120"
+            />
           )}
-          <AvatarFallback>{testimonial.author!.split(" ").map((word) => word[0]).join("")}</AvatarFallback>
+          <AvatarFallback>
+            {testimonial
+              .author!.split(" ")
+              .map((word) => word[0])
+              .join("")}
+          </AvatarFallback>
         </Avatar>
+        <div className="">
+          <h3
+            className="font-medium"
+            data-tina-field={tinaField(testimonial, "author")}
+          >
+            {testimonial.author}
+          </h3>
 
+          <span
+            className="text-muted-foreground block text-sm tracking-wide"
+            data-tina-field={tinaField(testimonial, "role")}
+          >
+            {testimonial.role}
+          </span>
+        </div>
+      </CardHeader>
+      <CardContent className="grid -mt-3 grid-cols-[auto_1fr] gap-3">
         <div>
-          <h3 className="font-medium" data-tina-field={tinaField(testimonial, 'author')}>{testimonial.author}</h3>
-
-          <span className="text-muted-foreground block text-sm tracking-wide" data-tina-field={tinaField(testimonial, 'role')}>{testimonial.role}</span>
-
-          <blockquote className="mt-3" data-tina-field={tinaField(testimonial, 'quote')}>
-            <p className="text-gray-700 dark:text-gray-300">{testimonial.quote}</p>
+          <blockquote
+            className="mt-3 border-l-4"
+            data-tina-field={tinaField(testimonial, "quote")}
+          >
+            <p className="ml-2 text-gray-700 dark:text-gray-300">
+              {testimonial.quote}
+            </p>
           </blockquote>
         </div>
       </CardContent>
@@ -85,7 +140,8 @@ export const testimonialBlockSchema: Template = {
       name: "testimonials",
       ui: {
         defaultItem: {
-          quote: "There are only two hard things in Computer Science: cache invalidation and naming things.",
+          quote:
+            "There are only two hard things in Computer Science: cache invalidation and naming things.",
           author: "Phil Karlton",
         },
         itemProps: (item) => {
@@ -95,6 +151,8 @@ export const testimonialBlockSchema: Template = {
         },
       },
       fields: [
+        sectionBlockSchemaField as any,
+
         {
           type: "string",
           ui: {
@@ -117,7 +175,7 @@ export const testimonialBlockSchema: Template = {
           type: "image",
           label: "Avatar",
           name: "avatar",
-        }
+        },
       ],
     },
   ],
