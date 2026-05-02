@@ -58,11 +58,11 @@ const ExperienceItem: React.FC<PageBlocksExperienceItemsExperience> = (
           {data.title}
         </h3>
 
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-sm">
           <span data-tina-field={tinaField(data, "startDate")}>
             {formatDate(data?.startDate!)}
           </span>{" "}
-          -
+          -{" "}
           <span data-tina-field={tinaField(data, "endDate")}>
             {formatDate(data?.endDate!) || "Present"}
           </span>

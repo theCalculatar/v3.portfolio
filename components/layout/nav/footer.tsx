@@ -38,7 +38,7 @@ export const Footer = () => {
           </div>
         </div>
         <div
-          className="relative overflow-hidden pt-2 text-center sm:pt-4 lg:pt-8"
+          className="relative overflow-hidden py-4 text-center sm:pt-4 lg:pt-8"
           aria-hidden
         >
           <p
