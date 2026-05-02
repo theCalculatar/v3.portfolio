@@ -20,7 +20,7 @@ import { Icon } from "../icon";
 
 export const Projects = ({ data }: { data: PageBlocksProject }) => {
   return (
-    <Section background={data.background!}>
+    <Section background={data.background!} id="projects">
       <div className="@container mx-auto max-w-5xl">
         <div className="text-center">
           <h2
@@ -83,7 +83,7 @@ export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
           </div>
           <h3
             data-tina-field={tinaField(data, "title")}
-            className="font-medium text-lg mt-2 underline"
+            className="font-medium text-lg mt-2 underline md:no-underline group-hover:underline"
           >
             {data.title}
           </h3>

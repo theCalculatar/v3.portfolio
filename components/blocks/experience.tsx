@@ -14,7 +14,7 @@ import { Badge } from "../ui/badge";
 
 function Experience({ data }: { data: PageBlocksExperience }) {
   return (
-    <Section background={data.background!}>
+    <Section background={data.background!} id="experience">
       <div className="@container mx-auto max-w-3xl">
         <div className="text-center">
           <h2
