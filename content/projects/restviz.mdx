@@ -1,11 +1,74 @@
 ---
-title: restviz
+title: RestViz
 description: |
   A zero-config Express middleware for generating interactive API docs and live testing UI – all from your routes.
 text: |
-  The RestViz NPM package is a plug-and-play middleware for Express (v4 & v5) that auto-generates interactive API documentation. With support for custom metadata like descriptions, request bodies, and example responses, RestViz turns your backend into a live-testing environment. No need for Swagger or Postman — just drop it in your app, and you're good to go. It’s fast, framework-agnostic, and focused on developer ergonomics.
+  ## Project Overview
+
+  **RestViz** is a middleware-driven developer tool that transforms APIs into **self-documenting, testable, and observable systems**.
+  Instead of relying on separate tools for documentation, testing, and monitoring, RestViz unifies these into a single workflow.
+
+  <BlockQuote>
+    What if your API could document, test, and explain itself — in real time?
+  </BlockQuote>
+
+  Instead of manually writing and maintaining API documentation in external tools, **RestViz** allows developers to define useful route metadata in a route.json file, This keeps documentation closer to the code, easier to update, and more accurate as the API changes.
+
+  The project is designed to be simple, fast, and practical for real backend development. Developers can install RestViz, plug it into an Express app, and instantly get a visual overview of available routes, request structures, notes, responses, and testing capabilities.
+
+  ## Architecture
+
+  RestViz operates across three layers:
+
+  ### 1. Middleware (Core Engine)
+
+  Captures request/response data and route metadata in real time.
+
+  ### 2. Local UI
+
+  Provides interactive API docs and testing — no external tools required.
+
+  ### 3. Cloud Sync (Workspaces): in-progress
+
+  Optional layer that syncs API state for collaboration and history tracking.
+
+  ## Key Features
+
+  * Automatic API route visualization for Express applications
+  * Support for route metadata such as descriptions, notes, request bodies, parameters, and response examples
+  * Interactive API testing directly from the documentation interface
+  * Support for multiple HTTP methods including `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`
+  * Custom headers input for testing protected or configured endpoints
+  * Live request sending using `fetch`
+  * Clean developer-friendly UI for viewing and testing APIs
+  * Support for nested Express routers
+  * Express v5 alpha compatibility
+  * TypeScript support through custom type definitions
+  * Middleware-based architecture for simple integration
+
+  ## Example Usage
+
+  ```javascript
+  import { init, Options, Theme } from 'restviz'
+
+  const app = express()
+
+  const theme: Theme = 'light'
+
+  const options: Options = {
+    title: 'My API Documentation', // Set a custom title for the web interface
+    theme: 'dark', // Choose between "light" or "dark" theme
+  }
+
+  app.use(init(express, options))
+  ```
 date: 2025-01-01T17:57:01.495Z
 image: /uploads/projects/image 13.png
+tags:
+  - tag: content/tags/Typescript.mdx
+  - tag: content/tags/nodeJs.mdx
+  - tag: content/tags/Preact.mdx
+  - tag: content/tags/EJS.mdx
 url: 'https://www.npmjs.com/package/restviz'
 ---
 

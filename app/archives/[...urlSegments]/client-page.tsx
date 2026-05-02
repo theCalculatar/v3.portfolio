@@ -10,6 +10,7 @@ import { components } from "@/components/mdx-components";
 import ErrorBoundary from "@/components/error-boundary";
 import { formatDate } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { ScriptCopyBtn } from "@/components/magicui/script-copy-btn";
 
 const titleColorClasses = {
   blue: "from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500",
@@ -109,6 +110,7 @@ export default function ProjectClientPage(props: ClientProjectProps) {
             content={project.text}
             components={{
               ...components,
+              scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
             }}
           />
         </div>

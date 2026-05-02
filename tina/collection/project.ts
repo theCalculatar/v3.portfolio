@@ -1,3 +1,4 @@
+import { scriptCopyBlockSchema } from "@/components/magicui/script-copy-btn";
 import type { Collection } from "tinacms";
 
 const Project: Collection = {
@@ -5,11 +6,11 @@ const Project: Collection = {
   label: "Projects listing",
   path: "content/projects",
   format: "mdx",
-    ui: {
-      router: ({ document }) => {
-        return `/archives/${document._sys.breadcrumbs.join("/")}`;
-      },
+  ui: {
+    router: ({ document }) => {
+      return `/archives/${document._sys.breadcrumbs.join("/")}`;
     },
+  },
   fields: [
     {
       type: "string",
@@ -27,6 +28,23 @@ const Project: Collection = {
       type: "rich-text",
       name: "text",
       label: "Text",
+      templates: [
+        {
+          name: "BlockQuote",
+          label: "Block Quote",
+          fields: [
+            {
+              name: "children",
+              label: "Quote",
+              type: "rich-text",
+              overrides: {
+                toolbar: ["bold", "italic", "link"],
+              },
+            },
+          ],
+        },
+        scriptCopyBlockSchema,
+      ],
     },
     {
       type: "datetime",
