@@ -13,6 +13,10 @@ import {
 import { Badge } from "../ui/badge";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { components } from "../mdx-components";
+import { iconSchema } from "@/tina/fields/icon";
+import { Button } from "../ui/button";
+import Link from "next/link";
+import { Icon } from "../icon";
 
 export const Projects = ({ data }: { data: PageBlocksProject }) => {
   return (
@@ -38,6 +42,23 @@ export const Projects = ({ data }: { data: PageBlocksProject }) => {
               return <Project key={i} {...block!.project!} />;
             })}
         </div>
+        <div
+          className="mt-8 md:mt-16 flex"
+          data-tina-field={tinaField(data, "action")}
+        >
+          {data.action && (
+            <Button
+              size="lg"
+              variant={data.action!.type === "link" ? "ghost" : "default"}
+              className="mx-auto rounded-xl px-5 text-base"
+            >
+              <Link href={data.action!.link!}>
+                {data.action?.icon && <Icon data={data.action?.icon} />}
+                <span className="text-nowrap">{data.action!.label}</span>
+              </Link>
+            </Button>
+          )}
+        </div>
       </div>
     </Section>
   );
@@ -45,56 +66,58 @@ export const Projects = ({ data }: { data: PageBlocksProject }) => {
 
 export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
   return (
-    <Card className="group relative shadow-zinc-950/5 bg-zinc-50 overflow-hidden  p-4 space-y-0 gap-2">
-      <CardHeader className="p-0 m-0 z-10">
-        <div
-          className="w-full h-full"
-          data-tina-field={tinaField(data, "image")}
-        >
-          <Image
-            src={data.image || "/uploads/860shots_so.jpg"}
-            alt={"Feature Icon"}
-            width={348}
-            height={348}
-            className="mx-auto w-full h-full rounded-xl overflow-hidden opacity object-contain select-none"
-          ></Image>
-        </div>
-        <h3
-          data-tina-field={tinaField(data, "title")}
-          className="font-medium text-lg"
-        >
-          {data.title}
-        </h3>
-      </CardHeader>
+    <Link href={"/archives/" + data._sys.breadcrumbs.join("/")}>
+      <Card className="group relative shadow-zinc-950/5 bg-zinc-50 overflow-hidden  p-4 space-y-0 gap-2">
+        <CardHeader className="p-0 m-0 z-10">
+          <div
+            className="w-full h-full"
+            data-tina-field={tinaField(data, "image")}
+          >
+            <Image
+              src={data.image || "/uploads/860shots_so.jpg"}
+              alt={"Feature Icon"}
+              width={348}
+              height={348}
+              className="mx-auto w-full h-full rounded-xl overflow-hidden opacity object-contain select-none"
+            ></Image>
+          </div>
+          <h3
+            data-tina-field={tinaField(data, "title")}
+            className="font-medium text-lg mt-2 underline"
+          >
+            {data.title}
+          </h3>
+        </CardHeader>
 
-      <CardContent className="text-sm p-0 m-0 z-10 text-gray-500">
-        <div
-          className="prose dark:prose-dark"
-          data-tina-field={tinaField(data, "description")}
-        >
-          <TinaMarkdown
-            content={data.description}
-            components={{
-              ...components,
-            }}
-          />
-        </div>
-      </CardContent>
-      <CardFooter className="p-0 m-0 z-10 flex flex-wrap gap-2 *:text-gray-500">
-        {data.tags &&
-          data.tags?.map(function (block, i) {
-            return (
-              <Badge
-                key={i}
-                variant={"outline"}
-                data-tina-field={tinaField(block, "tag")}
-              >
-                {block?.tag?.name}
-              </Badge>
-            );
-          })}
-      </CardFooter>
-    </Card>
+        <CardContent className="text-sm p-0 m-0 z-10 text-gray-500">
+          <div
+            className="prose dark:prose-dark"
+            data-tina-field={tinaField(data, "description")}
+          >
+            <TinaMarkdown
+              content={data.description}
+              components={{
+                ...components,
+              }}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="p-0 m-0 z-10 flex flex-wrap gap-2 *:text-gray-500">
+          {data.tags &&
+            data.tags?.map(function (block, i) {
+              return (
+                <Badge
+                  key={i}
+                  variant={"outline"}
+                  data-tina-field={tinaField(block, "tag")}
+                >
+                  {block?.tag?.name}
+                </Badge>
+              );
+            })}
+        </CardFooter>
+      </Card>
+    </Link>
   );
 };
 
@@ -122,6 +145,46 @@ export const projectBlockSchema: Template = {
       name: "description",
     },
     {
+      label: "Action",
+      name: "action",
+      type: "object",
+      ui: {
+        defaultItem: {
+          label: "Action Label",
+          type: "button",
+          icon: {
+            name: "Tina",
+            color: "white",
+            style: "float",
+          },
+          link: "/",
+        },
+        itemProps: (item) => ({ label: item.label }),
+      },
+      fields: [
+        {
+          label: "Label",
+          name: "label",
+          type: "string",
+        },
+        {
+          label: "Type",
+          name: "type",
+          type: "string",
+          options: [
+            { label: "Button", value: "button" },
+            { label: "Link", value: "link" },
+          ],
+        },
+        iconSchema as any,
+        {
+          label: "Link",
+          name: "link",
+          type: "string",
+        },
+      ],
+    },
+    {
       type: "object",
       name: "items",
       label: "Projects",
@@ -129,7 +192,7 @@ export const projectBlockSchema: Template = {
 
       ui: {
         itemProps: (item) => {
-          return { label: item?.project || "Project" };
+          return { label: item?.project || "Select a project" };
         },
       },
       fields: [
