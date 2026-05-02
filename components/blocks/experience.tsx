@@ -123,7 +123,7 @@ export const experienceBlockSchema: Template = {
   name: "experience",
   label: "Experience",
   ui: {
-    previewSrc: "/blocks/experience.png",
+    previewSrc: "/blocks/experience.webp",
     defaultItem: {
       title: "Experience",
       company: "Company Name",

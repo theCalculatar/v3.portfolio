@@ -148,7 +148,7 @@ export const heroBlockSchema: Template = {
   name: "hero",
   label: "Hero",
   ui: {
-    previewSrc: "/blocks/hero.png",
+    previewSrc: "/blocks/hero.webp",
     defaultItem: {
       tagline: "Here's some text above the other text",
       headline: "This Big Text is Totally Awesome",

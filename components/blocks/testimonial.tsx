@@ -107,7 +107,7 @@ export const testimonialBlockSchema: Template = {
   name: "testimonial",
   label: "Testimonial",
   ui: {
-    previewSrc: "/blocks/testimonial.png",
+    previewSrc: "/blocks/testimonials.webp",
     defaultItem: {
       testimonials: [
         {

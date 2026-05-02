@@ -123,9 +123,9 @@ export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
 
 export const projectBlockSchema: Template = {
   name: "project",
-  label: "Project",
+  label: "Projects",
   ui: {
-    previewSrc: "/blocks/Project.png",
+    previewSrc: "/blocks/projects.webp",
     defaultItem: {
       title: "Selected Projects",
       description:

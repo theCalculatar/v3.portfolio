@@ -50,6 +50,7 @@ export const badgeBlockSchema: Template = {
   label: "Badge",
   ui: {
     defaultItem: {},
+    previewSrc:'/blocks/badge.webp'
   },
   fields: [
     sectionBlockSchemaField as any,

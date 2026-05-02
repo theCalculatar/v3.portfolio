@@ -109,7 +109,7 @@ export const featureBlockSchema: Template = {
   name: "features",
   label: "Features",
   ui: {
-    previewSrc: "/blocks/features.png",
+    previewSrc: "/blocks/features.webp",
     defaultItem: {
       title: "What I Do?",
       description:

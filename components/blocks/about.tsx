@@ -83,7 +83,7 @@ export const aboutBlockSchema: Template = {
   name: "about",
   label: "About",
   ui: {
-    previewSrc: "/blocks/about.png",
+    previewSrc: "/blocks/about.webp",
     defaultItem: {
       title: "I build systems — not just apps.",
       description:
