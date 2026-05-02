@@ -72,7 +72,11 @@ const ExperienceItem: React.FC<PageBlocksExperienceItemsExperience> = (
         <span className="flex items-center gap-1">
           <span className="size-3 border-l-2 border-gray-500 border-b-2"></span>
           <span data-tina-field={tinaField(data, "company")}>
-            <Link href={""} className="underline">
+            <Link
+              href={data.link ?? ""}
+              data-tina-field={tinaField(data, "link")}
+              className="underline"
+            >
               {data.company}
             </Link>
           </span>

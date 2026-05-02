@@ -34,6 +34,11 @@ const Experience: Collection = {
       label: "Company",
     },
     {
+      type: "string",
+      name: "link",
+      label: "Link",
+    },
+    {
       type: "object",
       name: "tags",
       label: "Tags",
