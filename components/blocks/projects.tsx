@@ -11,6 +11,8 @@ import {
   PageBlocksProjectItemsProject,
 } from "@/tina/__generated__/types";
 import { Badge } from "../ui/badge";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
+import { components } from "../mdx-components";
 
 export const Projects = ({ data }: { data: PageBlocksProject }) => {
   return (
@@ -66,9 +68,17 @@ export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
       </CardHeader>
 
       <CardContent className="text-sm p-0 m-0 z-10 text-gray-500">
-        <p data-tina-field={tinaField(data, "description")}>
-          {data.description}
-        </p>
+        <div
+          className="prose dark:prose-dark"
+          data-tina-field={tinaField(data, "description")}
+        >
+          <TinaMarkdown
+            content={data.description}
+            components={{
+              ...components,
+            }}
+          />
+        </div>
       </CardContent>
       <CardFooter className="p-0 m-0 z-10 flex flex-wrap gap-2 *:text-gray-500">
         {data.tags &&

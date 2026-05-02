@@ -1,14 +1,15 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { format } from "date-fns";
 import { tinaField, useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
-import { PostQuery } from "@/tina/__generated__/types";
+import { ProjectQuery } from "@/tina/__generated__/types";
 import { useLayout } from "@/components/layout/layout-context";
 import { Section } from "@/components/layout/section";
 import { components } from "@/components/mdx-components";
 import ErrorBoundary from "@/components/error-boundary";
+import { formatDate } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 const titleColorClasses = {
   blue: "from-blue-400 to-blue-600 dark:from-blue-300 dark:to-blue-500",
@@ -24,88 +25,64 @@ const titleColorClasses = {
     "from-yellow-400 to-yellow-500 dark:from-yellow-300 dark:to-yellow-500",
 };
 
-interface ClientPostProps {
-  data: PostQuery;
+interface ClientProjectProps {
+  data: ProjectQuery;
   variables: {
     relativePath: string;
   };
   query: string;
 }
 
-export default function PostClientPage(props: ClientPostProps) {
+export default function ProjectClientPage(props: ClientProjectProps) {
   const { theme } = useLayout();
   const { data } = useTina({ ...props });
-  const post = data.post;
-
-  const date = new Date(post.date!);
-  let formattedDate = "";
-  if (!isNaN(date.getTime())) {
-    formattedDate = format(date, "MMM dd, yyyy");
-  }
+  const project = data.project;
 
   const titleColour =
     titleColorClasses[theme!.color! as keyof typeof titleColorClasses];
 
   return (
     <ErrorBoundary>
-      <Section>
+      <Section className="max-w-6xl">
         <h2
-          data-tina-field={tinaField(post, "title")}
+          data-tina-field={tinaField(project, "title")}
           className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}
         >
           <span
             className={`bg-clip-text text-transparent bg-linear-to-r ${titleColour}`}
           >
-            {post.title}
+            {project.title}
           </span>
         </h2>
-        <div
-          data-tina-field={tinaField(post, "author")}
-          className="flex items-center justify-center mb-16"
-        >
-          {post.author && (
-            <>
-              {post.author.avatar && (
-                <div className="shrink-0 mr-4">
-                  <Image
-                    data-tina-field={tinaField(post.author, "avatar")}
-                    priority={true}
-                    className="h-14 w-14 object-cover rounded-full shadow-xs"
-                    src={post.author.avatar}
-                    alt={post.author.name}
-                    width={500}
-                    height={500}
-                  />
-                </div>
-              )}
-              <p
-                data-tina-field={tinaField(post.author, "name")}
-                className="text-base font-medium text-gray-600 group-hover:text-gray-800 dark:text-gray-200 dark:group-hover:text-white"
+        <div className="flex items-center justify-center gap-4 mt-4 mb-12">
+          {project.tags?.map((data, index) => {
+            return (
+              <Badge
+                data-tina-field={tinaField(data, "tag")}
+                variant={"outline"}
+                key={index}
               >
-                {post.author.name}
-              </p>
-              <span className="font-bold text-gray-200 dark:text-gray-500 mx-2">
-                —
-              </span>
-            </>
-          )}
+                {data?.tag?.name}
+              </Badge>
+            );
+          })}
           <p
-            data-tina-field={tinaField(post, "date")}
+            data-tina-field={tinaField(project, "date")}
             className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150"
           >
-            {formattedDate}
+            {formatDate()}
           </p>
         </div>
-        {post.heroImg && (
+        {project.image && (
           <div className="px-4 w-full">
             <div
-              data-tina-field={tinaField(post, "heroImg")}
+              data-tina-field={tinaField(project, "image")}
               className="relative max-w-4xl lg:max-w-5xl mx-auto"
             >
               <Image
                 priority={true}
-                src={post.heroImg}
-                alt={post.title}
+                src={project.image}
+                alt={project.title}
                 className="absolute block mx-auto rounded-lg w-full h-auto blur-2xl brightness-150 contrast-[0.9] dark:brightness-150 saturate-200 opacity-50 dark:opacity-30 mix-blend-multiply dark:mix-blend-hard-light"
                 aria-hidden="true"
                 width={500}
@@ -114,8 +91,8 @@ export default function PostClientPage(props: ClientPostProps) {
               />
               <Image
                 priority={true}
-                src={post.heroImg}
-                alt={post.title}
+                src={project.image}
+                alt={project.title}
                 width={500}
                 height={500}
                 className="relative z-10 mb-14 mx-auto block rounded-lg w-full h-auto opacity-100"
@@ -125,15 +102,22 @@ export default function PostClientPage(props: ClientPostProps) {
           </div>
         )}
         <div
-          data-tina-field={tinaField(post, "_body")}
+          data-tina-field={tinaField(project, "text")}
           className="prose dark:prose-dark w-full max-w-none"
         >
           <TinaMarkdown
-            content={post._body}
+            content={project.text}
             components={{
               ...components,
             }}
           />
+        </div>
+        <div className="mt-6 flex w-fit border-t items-center space-x-4 text-sm pt-2 md:mt-8">
+          <span className="text-muted-foreground">Mabetlela Mahlane</span>
+          <span className="text-muted-foreground">•</span>
+          <span className="text-muted-foreground">
+            {formatDate(project.date!)}
+          </span>
         </div>
       </Section>
     </ErrorBoundary>

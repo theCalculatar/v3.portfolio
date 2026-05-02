@@ -5,11 +5,11 @@ const Project: Collection = {
   label: "Projects listing",
   path: "content/projects",
   format: "mdx",
-  //   ui: {
-  //     router: ({ document }) => {
-  //       return `/project/${document._sys.breadcrumbs.join("/")}`;
-  //     },
-  //   },
+    ui: {
+      router: ({ document }) => {
+        return `/archives/${document._sys.breadcrumbs.join("/")}`;
+      },
+    },
   fields: [
     {
       type: "string",
@@ -19,7 +19,7 @@ const Project: Collection = {
       required: true,
     },
     {
-      type: "string",
+      type: "rich-text",
       name: "description",
       label: "Description",
     },
@@ -27,6 +27,11 @@ const Project: Collection = {
       type: "rich-text",
       name: "text",
       label: "Text",
+    },
+    {
+      type: "datetime",
+      name: "date",
+      label: "Date",
     },
     {
       type: "image",
