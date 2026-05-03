@@ -35,12 +35,14 @@ interface ClientProjectProps {
 }
 
 export default function ProjectClientPage(props: ClientProjectProps) {
-  const { theme } = useLayout();
+  const { theme, globalSettings } = useLayout();
   const { data } = useTina({ ...props });
   const project = data.project;
 
   const titleColour =
     titleColorClasses[theme!.color! as keyof typeof titleColorClasses];
+
+  const header = globalSettings!.header!;
 
   return (
     <ErrorBoundary>
@@ -115,7 +117,7 @@ export default function ProjectClientPage(props: ClientProjectProps) {
           />
         </div>
         <div className="mt-6 flex w-fit border-t items-center space-x-4 text-sm pt-2 md:mt-8">
-          <span className="text-muted-foreground">Mabetlela Mahlane</span>
+          <span className="text-muted-foreground">{header.name}</span>
           <span className="text-muted-foreground">•</span>
           <span className="text-muted-foreground">
             {formatDate(project.date!)}
