@@ -82,7 +82,25 @@ export default function RootLayout({
         </VideoDialogProvider>
         <TailwindIndicator />
         <Analytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd),
+          }}
+        />
       </body>
     </html>
   );
 }
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Alpheus Mabetlela",
+  url: "https://alpheusmabetlela.com",
+  jobTitle: "Product Engineer",
+  sameAs: [
+    "https://github.com/theCalculatar",
+    "https://www.linkedin.com/in/mahlane/",
+  ],
+};

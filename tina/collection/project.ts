@@ -52,6 +52,11 @@ const Project: Collection = {
       label: "Date",
     },
     {
+      type: "datetime",
+      name: "updatedAt",
+      label: "updatedAt",
+    },
+    {
       type: "image",
       name: "image",
       label: "Image",
