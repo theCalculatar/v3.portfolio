@@ -21,7 +21,7 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
         <div className="text-center">
           <h2
             data-tina-field={tinaField(data, "title")}
-            className="text-balance text-4xl font-semibold lg:text-5xl"
+            className="text-balance text-3xl sm:text-4xl font-semibold lg:text-5xl"
           >
             {data.title}
           </h2>
