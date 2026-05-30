@@ -74,7 +74,7 @@ export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
         <Card className="group relative shadow-zinc-950/5 bg-zinc-50 overflow-hidden p-4 gap-2">
           <CardHeader className="p-0 m-0 z-10">
             <div
-              className="w-full h-auto max-h-72 md:max-h-fit bg-red-400"
+              className="w-full h-auto max-h-72 md:max-h-fit "
               data-tina-field={tinaField(data, "image")}
             >
               <Image
