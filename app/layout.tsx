@@ -81,7 +81,7 @@ export default function RootLayout({
           <VideoDialog />
         </VideoDialogProvider>
         <TailwindIndicator />
-        <Analytics />
+        {/* <Analytics /> */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
