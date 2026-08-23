@@ -25,7 +25,7 @@ export const Projects = ({ data }: { data: PageBlocksProject }) => {
         <div className="text-center">
           <h2
             data-tina-field={tinaField(data, "title")}
-            className="text-balance text-4xl font-semibold lg:text-5xl"
+            className="text-balance text-3xl sm:text-4xl font-semibold lg:text-5xl"
           >
             {data.title}
           </h2>
@@ -65,58 +65,67 @@ export const Projects = ({ data }: { data: PageBlocksProject }) => {
 };
 
 export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
+  const href = `/archives/${data._sys.breadcrumbs.join("/")}`;
+  const title = data.title || "Project archive";
+  const imageAlt = `${title} preview image`;
   return (
-    <Link href={"/archives/" + data._sys.breadcrumbs.join("/")}>
-      <Card className="group relative shadow-zinc-950/5 bg-zinc-50 overflow-hidden  p-4 space-y-0 gap-2">
-        <CardHeader className="p-0 m-0 z-10">
-          <div
-            className="w-full h-full"
-            data-tina-field={tinaField(data, "image")}
-          >
-            <Image
-              src={data.image || "/uploads/860shots_so.jpg"}
-              alt={"Feature Icon"}
-              width={348}
-              height={348}
-              className="mx-auto w-full h-full rounded-xl overflow-hidden opacity object-contain select-none"
-            ></Image>
-          </div>
-          <h3
-            data-tina-field={tinaField(data, "title")}
-            className="font-medium text-lg mt-2 underline md:no-underline group-hover:underline"
-          >
-            {data.title}
-          </h3>
-        </CardHeader>
+    <Link href={href} aria-label={`Read more about ${title}`}>
+      <article>
+        <Card className="group relative shadow-zinc-950/5 bg-zinc-50 overflow-hidden p-4 gap-2">
+          <CardHeader className="p-0 m-0 z-10">
+            <div
+              className="w-full h-auto max-h-72 md:max-h-fit "
+              data-tina-field={tinaField(data, "image")}
+            >
+              <Image
+                src={data.image || "/uploads/860shots_so.jpg"}
+                alt={imageAlt}
+                width={348}
+                height={348}
+                // sizes="(max-width: 768px) 100vw, 348px"
+                className="w-full h-fit rounded-xl object-contain select-none"
+              />
+            </div>
 
-        <CardContent className="text-sm p-0 m-0 z-10 text-gray-500">
-          <div
-            className="prose dark:prose-dark"
-            data-tina-field={tinaField(data, "description")}
-          >
-            <TinaMarkdown
-              content={data.description}
-              components={{
-                ...components,
-              }}
-            />
-          </div>
-        </CardContent>
-        <CardFooter className="p-0 m-0 z-10 flex flex-wrap gap-2 *:text-gray-500">
-          {data.tags &&
-            data.tags?.map(function (block, i) {
-              return (
-                <Badge
-                  key={i}
-                  variant={"outline"}
-                  data-tina-field={tinaField(block, "tag")}
-                >
-                  {block?.tag?.name}
-                </Badge>
-              );
-            })}
-        </CardFooter>
-      </Card>
+            <h3
+              data-tina-field={tinaField(data, "title")}
+              className="font-medium text-lg mt-2 underline md:no-underline group-hover:underline"
+            >
+              {title}
+            </h3>
+          </CardHeader>
+
+          {data.description && (
+            <CardContent className="text-sm p-0 m-0 z-10 text-gray-500">
+              <div
+                className="prose dark:prose-dark line-clamp-3"
+                data-tina-field={tinaField(data, "description")}
+              >
+                <TinaMarkdown
+                  content={data.description}
+                  components={components}
+                />
+              </div>
+            </CardContent>
+          )}
+
+          {data.tags && data.tags.length > 0 && (
+            <CardFooter className="p-0 m-0 z-10 flex flex-wrap gap-2 *:text-gray-500">
+              {data.tags.map((block, i) =>
+                block?.tag?.name ? (
+                  <Badge
+                    key={i}
+                    variant="outline"
+                    data-tina-field={tinaField(block, "tag")}
+                  >
+                    {block.tag.name}
+                  </Badge>
+                ) : null,
+              )}
+            </CardFooter>
+          )}
+        </Card>
+      </article>
     </Link>
   );
 };
