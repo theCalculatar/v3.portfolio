@@ -9,12 +9,12 @@
     "color": "default",
     "nav": [
       {
-        "href": "/",
-        "label": "Home"
+        "href": "/about",
+        "label": "About"
       },
       {
-        "href": "/#projects",
-        "label": "Projects"
+        "href": "/archives",
+        "label": "Archives"
       },
       {
         "href": "/#experience",

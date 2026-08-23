@@ -65,7 +65,7 @@ export const Projects = ({ data }: { data: PageBlocksProject }) => {
 };
 
 export const Project: React.FC<PageBlocksProjectItemsProject> = (data) => {
-  const href = `/archives/${data._sys.breadcrumbs.join("/")}`;
+  const href = `/archives/${data?._sys?.breadcrumbs.join("/")}`;
   const title = data.title || "Project archive";
   const imageAlt = `${title} preview image`;
   return (
