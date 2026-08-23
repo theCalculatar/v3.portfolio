@@ -137,6 +137,8 @@ const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
         className="z-2 aspect-15/8 relative  max-w-full h-auto "
         alt={image!.alt || ""}
         src={image!.src!}
+        loading="eager"
+        fetchPriority="high"
         height={4000}
         width={3000}
       />
