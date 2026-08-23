@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import client from "@/tina/__generated__/client";
 
 const baseUrl = "https://alpheusmabetlela.com";
-const FALLBACK_DATE = "2026-05-16";
+const FALLBACK_DATE = "2026-08-23";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projectsRes = await client.queries.projectConnection();
