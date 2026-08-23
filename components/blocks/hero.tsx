@@ -20,19 +20,16 @@ const transitionVariants = {
     visible: {
       transition: {
         staggerChildren: 0.05,
-        delayChildren: 0.75,
       },
     },
   },
   item: {
     hidden: {
       opacity: 0,
-      filter: "blur(12px)",
       y: 12,
     },
     visible: {
       opacity: 1,
-      filter: "blur(0px)",
       y: 0,
       transition: {
         type: "spring",
@@ -134,11 +131,13 @@ const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
   if (image.src) {
     return (
       <Image
-        className="z-2 aspect-15/8 relative  max-w-full h-auto "
+        className="z-2 aspect-15/8 relative  max-w-full h-auto object-cover"
         alt={image!.alt || ""}
         src={image!.src!}
-        height={4000}
-        width={3000}
+        sizes={"(min-width: 1024px) 50vw, 100vw"}
+        priority
+        width={1500}
+        height={800}
       />
     );
   }

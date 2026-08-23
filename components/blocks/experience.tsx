@@ -98,7 +98,7 @@ const ExperienceItem: React.FC<PageBlocksExperienceItemsExperience> = (
                 data-tina-field={tinaField(block, "tag")}
                 className="rounded-lg"
               >
-                {block?.tag?.name}
+                {block?.tag?.name}{" "}
               </Badge>
             );
           })}
