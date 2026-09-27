@@ -9,12 +9,14 @@ import {
   PageBlocksHero,
   PageBlocksHeroImage,
 } from "../../tina/__generated__/types";
-import { Icon } from "../icon";
 import { Section, sectionBlockSchemaField } from "../layout/section";
 import { AnimatedGroup } from "../motion-primitives/animated-group";
 import { TextEffect } from "../motion-primitives/text-effect";
-import { Button } from "../ui/button";
+import { ActionButton, Button, buttonBlockSchema } from "../ui/button";
 import { Transition } from "motion/react";
+import Preview from "../motion-primitives/preview";
+import BookingWidget, { bookingWidgetSchema } from "./booking-widget";
+import { Icon } from "../icon";
 const transitionVariants = {
   container: {
     visible: {
@@ -58,14 +60,14 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-      <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
+      <div className="text-center sm:mx-auto lg:mt-0 max-w-4xl">
         {data.headline && (
           <div data-tina-field={tinaField(data, "headline")}>
             <TextEffect
               preset="fade-in-blur"
               speedSegment={0.3}
               as="h1"
-              className="mt-8 tracking-tighter text-balance font-medium text-4xl sm:text-6xl xl:text-[5rem]"
+              className="mt-8 tracking-tighter text-balance font-medium text-4xl sm:text-6xl xl:text-[4rem]"
             >
               {data.headline!}
             </TextEffect>
@@ -91,21 +93,15 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
         >
           {data.actions &&
-            data.actions.map((action) => (
-              <div key={action!.label} data-tina-field={tinaField(action)}>
-                <Button
-                  asChild
-                  size="lg"
-                  variant={action!.type === "link" ? "ghost" : "default"}
-                  className="rounded-xl px-5 text-base"
-                >
-                  <Link href={action!.link!}>
-                    {action?.icon && <Icon data={action?.icon} />}
-                    <span className="text-nowrap">{action!.label}</span>
-                  </Link>
-                </Button>
-              </div>
-            ))}
+            data.actions.map((action) => {
+              return (
+                <div key={action!.label} data-tina-field={tinaField(action)}>
+                  <div className="bg-foreground/10 rounded-[calc(var(--radius-md)+0.125rem)] border p-0.5">
+                    <ActionBlock action={action} />
+                  </div>
+                </div>
+              );
+            })}
         </AnimatedGroup>
       </div>
 
@@ -117,7 +113,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           >
             <div className="absolute inset-0 z-1 "></div>
 
-            <div className="relative mx-auto max-w-6xl">
+            <div className="relative mx-auto max-w-3xl">
               <ImageBlock image={data.image} />
             </div>
           </div>
@@ -139,6 +135,26 @@ const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
         width={1500}
         height={800}
       />
+    );
+  }
+};
+
+export const ActionBlock = ({ action }: { action: any }) => {
+  if (action?.type_[0]?.__typename?.includes("BookingWidget")) {
+    return (
+      <Preview custom={<BookingWidget data={action?.type_[0]} />}>
+        <Button>{action.label}</Button>
+      </Preview>
+    );
+  } else {
+    return (
+      <ActionButton
+        variant={action?.type_[0]?.type_ === "link" ? "ghost" : "default"}
+        className="rounded-xl px-5 text-base "
+      >
+        {action?.icon && <Icon data={action?.icon} />}
+        <span className="text-nowrap">{action!.label}</span>
+      </ActionButton>
     );
   }
 };
@@ -209,18 +225,13 @@ export const heroBlockSchema: Template = {
         },
         {
           label: "Type",
-          name: "type",
-          type: "string",
-          options: [
-            { label: "Button", value: "button" },
-            { label: "Link", value: "link" },
-          ],
-        },
-        iconSchema as any,
-        {
-          label: "Link",
-          name: "link",
-          type: "string",
+          name: "type_",
+          type: "object",
+          list: true,
+          ui: {
+            visualSelector: true,
+          },
+          templates: [bookingWidgetSchema, buttonBlockSchema],
         },
       ],
     },

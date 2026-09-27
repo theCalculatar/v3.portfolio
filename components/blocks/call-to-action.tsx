@@ -2,10 +2,12 @@ import Link from "next/link";
 import type { Template } from "tinacms";
 import { tinaField } from "tinacms/dist/react";
 import { iconSchema } from "@/tina/fields/icon";
-import { Button } from "@/components/ui/button";
+import { ActionButton } from "@/components/ui/button";
 import { PageBlocksCta } from "@/tina/__generated__/types";
 import { Icon } from "../icon";
 import { Section, sectionBlockSchemaField } from "../layout/section";
+import Preview from "../motion-primitives/preview";
+import BookingWidget from "./booking-widget";
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
   return (
@@ -42,26 +44,27 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
         </p>
       </div>
       <div className="mt-4 flex flex-wrap justify-center gap-4">
-        {data.actions &&
-          data.actions.map((action) => (
-            <div
-              key={action!.label}
-              data-tina-field={tinaField(action)}
-              className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+        {data.contact && (
+          <div
+            data-tina-field={tinaField(data.contact)}
+            className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+          >
+            <Preview
+              custom={
+                <BookingWidget
+                  data={{
+                    title: data.contact?.label,
+                    message: data.contact?.message,
+                  }}
+                />
+              }
             >
-              <Button
-                asChild
-                size="lg"
-                variant={action!.type === "link" ? "ghost" : "default"}
-                className="rounded-xl px-5 text-base"
-              >
-                <Link href={action!.link!}>
-                  {action?.icon && <Icon data={action?.icon} />}
-                  <span className="text-nowrap">{action!.label}</span>
-                </Link>
-              </Button>
-            </div>
-          ))}
+              <ActionButton size="lg" className="rounded-xl px-5 text-base">
+                <span className="text-nowrap">{data.contact?.label}</span>
+              </ActionButton>
+            </Preview>
+          </div>
+        )}
       </div>
     </Section>
   );
@@ -76,18 +79,10 @@ export const ctaBlockSchema: Template = {
       title: "Start Building",
       description:
         "Get started with TinaCMS today and take your content management to the next level.",
-      actions: [
-        {
-          label: "Get Started",
-          type: "button",
-          link: "/",
-        },
-        {
-          label: "Book Demo",
-          type: "link",
-          link: "/",
-        },
-      ],
+      contact: {
+        message: "Let's create something great together.",
+        label: "Send me a ping :)",
+      },
     },
   },
   fields: [
@@ -106,43 +101,21 @@ export const ctaBlockSchema: Template = {
       },
     },
     {
-      label: "Actions",
-      name: "actions",
+      label: "Contact",
+      name: "contact",
       type: "object",
-      list: true,
-      ui: {
-        defaultItem: {
-          label: "Action Label",
-          type: "button",
-          icon: {
-            name: "Tina",
-            color: "white",
-            style: "float",
-          },
-          link: "/",
-        },
-        itemProps: (item) => ({ label: item.label }),
-      },
       fields: [
+        {
+          label: "Message",
+          name: "message",
+          type: "string",
+          required: true,
+        },
         {
           label: "Label",
           name: "label",
           type: "string",
-        },
-        {
-          label: "Type",
-          name: "type",
-          type: "string",
-          options: [
-            { label: "Button", value: "button" },
-            { label: "Link", value: "link" },
-          ],
-        },
-        iconSchema as any,
-        {
-          label: "Link",
-          name: "link",
-          type: "string",
+          required: true,
         },
       ],
     },

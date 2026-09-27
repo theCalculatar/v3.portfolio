@@ -13,8 +13,12 @@ export const Footer = () => {
       <div className="mx-auto max-w-6xl px-6">
         <div className="mt-12 flex flex-wrap border-t items-center gap-6 py-6 flex-col md:flex-row md:justify-between">
           <div className="order-last flex justify-center md:order-first md:justify-start">
-            <Link href="/" aria-label="go home">
-              <Icon parentColor={header!.color!} data={header!.icon} />
+            <Link href="/" aria-label="go home" className="*:h-7 *:w-7">
+              <Icon
+                parentColor={header!.color!}
+                className=""
+                data={{ ...header!.icon, size: "xs" }}
+              />
             </Link>
             <span className="self-center text-muted-foreground text-sm ml-2">
               © {new Date().getFullYear()} {header?.name}, All rights reserved
@@ -30,7 +34,7 @@ export const Footer = () => {
                 rel="noopener noreferrer"
               >
                 <Icon
-                  data={{ ...link!.icon, size: "small" }}
+                  data={{ ...link!.icon, size: "xs" }}
                   className="text-muted-foreground hover:text-primary block"
                 />
               </Link>

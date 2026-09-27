@@ -5,8 +5,7 @@ import { Section } from "../layout/section";
 import { sectionBlockSchemaField } from "../layout/section";
 import Image from "next/image";
 import { iconSchema } from "@/tina/fields/icon";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { ActionButton } from "../ui/button";
 import { Icon } from "../icon";
 import { act } from "react";
 
@@ -60,17 +59,15 @@ export const About = ({ data }: { data: PageBlocksAbout }) => {
               data-tina-field={tinaField(data.action)}
               className="mx-auto w-fit"
             >
-              <Button
-                asChild
+              <ActionButton
+                href={data.action?.link || undefined}
                 size="lg"
                 variant={data.action!.type === "link" ? "ghost" : "default"}
                 className="rounded-xl px-5 text-sm text-gray-600"
               >
-                <Link href={data.action!.link!}>
-                  {data.action?.icon && <Icon data={data.action?.icon} />}
-                  <span className="text-nowrap">{data.action!.label}</span>
-                </Link>
-              </Button>
+                {data.action?.icon && <Icon data={data.action?.icon} />}
+                <span className="text-nowrap">{data.action!.label}</span>
+              </ActionButton>
             </div>
           )}
         </div>

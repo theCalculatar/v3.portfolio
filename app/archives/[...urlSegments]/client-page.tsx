@@ -46,7 +46,7 @@ export default function ProjectClientPage(props: ClientProjectProps) {
 
   return (
     <ErrorBoundary>
-      <Section className="max-w-6xl">
+      <Section className="max-w-2xl">
         <h2
           data-tina-field={tinaField(project, "title")}
           className={`w-full relative\tmb-8 text-6xl font-extrabold tracking-normal text-center title-font`}
@@ -57,7 +57,7 @@ export default function ProjectClientPage(props: ClientProjectProps) {
             {project.title}
           </span>
         </h2>
-        <div className="flex items-center justify-center gap-4 mt-4 mb-12">
+        <div className="flex items-center justify-center gap-2 mt-4 mb-12">
           {project.tags?.map((data, index) => {
             return (
               <Badge
@@ -65,16 +65,10 @@ export default function ProjectClientPage(props: ClientProjectProps) {
                 variant={"outline"}
                 key={index}
               >
-                {data?.tag?.name}
+                {data?.tag?.name}{" "}
               </Badge>
             );
           })}
-          <p
-            data-tina-field={tinaField(project, "date")}
-            className="text-base text-gray-400 group-hover:text-gray-500 dark:text-gray-300 dark:group-hover:text-gray-150"
-          >
-            {formatDate()}
-          </p>
         </div>
         {project.image && (
           <div className="px-4 w-full">
@@ -98,8 +92,8 @@ export default function ProjectClientPage(props: ClientProjectProps) {
                 alt={project.title}
                 width={500}
                 height={500}
-                className="relative z-10 mb-14 mx-auto block rounded-lg w-full h-auto opacity-100"
-                style={{ maxWidth: "25vh" }}
+                className="relative z-10 mb-14 mx-auto block w-full h-auto opacity-100"
+                style={{ maxWidth: "50vh" }}
               />
             </div>
           </div>

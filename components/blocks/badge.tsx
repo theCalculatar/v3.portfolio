@@ -27,7 +27,7 @@ function Badge({ data }: { data: PageBlocksBadge }) {
               aria-hidden="true"
               width={200}
               height={200}
-              className="h-full w-full opacity object-cover hover:grayscale-0 active: transition-all duration-500 ease-in-out hover:scale-105"
+              className="h-full select-none w-full opacity object-cover hover:grayscale-0 active: transition-all duration-500 ease-in-out hover:scale-105"
             />
           )}
         </div>
@@ -50,7 +50,7 @@ export const badgeBlockSchema: Template = {
   label: "Badge",
   ui: {
     defaultItem: {},
-    previewSrc:'/blocks/badge.webp'
+    previewSrc: "/blocks/badge.webp",
   },
   fields: [
     sectionBlockSchemaField as any,

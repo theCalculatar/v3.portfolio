@@ -58,9 +58,9 @@ export default function ProjectClientPage(props: ClientPostProps) {
                 <div className="grid gap-y-6 sm:grid-cols-10 sm:gap-x-5 sm:gap-y-0 md:items-center md:gap-x-8 lg:gap-x-12">
                   <div className="sm:col-span-5">
                     <div className="mb-4 md:mb-6">
-                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground md:gap-5 lg:gap-6">
+                      <div className="flex flex-wrap gap-3 text-xs uppercase tracking-wider text-muted-foreground">
                         {post.tags?.map((tag) => (
-                          <span key={tag}>{tag}</span>
+                          <span key={tag}>{tag}{" "}</span>
                         ))}
                       </div>
                     </div>

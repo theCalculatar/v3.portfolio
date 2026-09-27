@@ -14,12 +14,10 @@ blocks:
       alt: TinaCMS Hero Image
     actions:
       - label: Schedule a 20-minute call
-        type: button
-        icon:
-          name: BiSolidCircle
-          color: green
-          style: ''
-        link: 'mailto:alpehusm13@gmail.com'
+        type_:
+          - title: Schedule a 20-minute call.
+            message: I'll get back to you as soon as possible!
+            _template: bookingWidget
     _template: hero
   - background: bg-white/80
     title: I build systems — not just apps.
@@ -98,13 +96,9 @@ blocks:
   - background: bg-gray-50/80
     title: Want to build something?
     description: Or just want to say hi?
-    actions:
-      - label: Say HI
-        type: button
-        icon:
-          name: BiSolidHand
-          color: yellow
-        link: 'mailto:alpheusm13@gmail.com'
+    contact:
+      message: Let's create something great together.
+      label: 'Shoot me a ping :)'
     _template: cta
 ---
 

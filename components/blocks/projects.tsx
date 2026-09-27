@@ -14,7 +14,7 @@ import { Badge } from "../ui/badge";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { components } from "../mdx-components";
 import { iconSchema } from "@/tina/fields/icon";
-import { Button } from "../ui/button";
+import { ActionButton } from "../ui/button";
 import Link from "next/link";
 import { Icon } from "../icon";
 
@@ -47,16 +47,15 @@ export const Projects = ({ data }: { data: PageBlocksProject }) => {
           data-tina-field={tinaField(data, "action")}
         >
           {data.action && (
-            <Button
+            <ActionButton
+              href={data.action?.link || undefined}
               size="lg"
               variant={data.action!.type === "link" ? "ghost" : "default"}
               className="mx-auto rounded-xl px-5 text-base"
             >
-              <Link href={data.action!.link!}>
-                {data.action?.icon && <Icon data={data.action?.icon} />}
-                <span className="text-nowrap">{data.action!.label}</span>
-              </Link>
-            </Button>
+              {data.action?.icon && <Icon data={data.action?.icon} />}
+              <span className="text-nowrap">{data.action!.label}</span>
+            </ActionButton>
           )}
         </div>
       </div>
